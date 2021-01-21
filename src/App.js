@@ -3,6 +3,26 @@ import ReactDOM from "react-dom";
 
 import "./styles.css";
 
+const useInput = (initialValue) => {
+  const [value, setValue] = usteState(initialValue);
+  const onChange = (event) => {
+    console.log(event.target);
+  }
+  return {value, onChange};
+}
+
+const App = () => {
+  const name = useInput("Mr.");
+  return (
+    <div className="App">
+      <h1>Hello</h1>
+      <input placeholder="Name" {...name} />
+    </div>
+  );
+};
+//value={name.value} = value={...name}과 같게 쓰인다
+
+/*
 //React Hooks useState활용
 const App = () => {
   const [item, setItem] = useState(1);
@@ -49,6 +69,6 @@ class AppUgly extends React.Component {
     });
   };
 }
-
+*/
 const rootElement = document.getElementById("root");
-ReactDOM.render(<AppUgly />, rootElement);
+ReactDOM.render(<App />, rootElement);
