@@ -1,6 +1,25 @@
 import React, { useState, useEffect, useRef } from "react";
 import ReactDOM from "react-dom";
 
+export const useConfirm = (message = "", onConfirm, onCancel) => {
+  if(!onConfirm || typeof onConfirm !== "function"){
+    return;
+  }
+  if(onCancel && typeof onCancel !== "function"){
+    return;
+  }
+  const confirmAction = () => {
+    if(confirm(message)){
+      onConfirm();
+      //delete
+    } else{
+      onCancel();
+      //abort
+    }
+  }
+  return confirmAction;
+};
+/*
 const useConfirm = (message = "", callback, rejection) => {
   if(typeof callback !== "function"){
     return;
@@ -16,6 +35,7 @@ const useConfirm = (message = "", callback, rejection) => {
   }
   return confirmAction;
 };
+*/
 const App = () => {
 
   const deleteWorld = () => console.log("deleting the world!");
